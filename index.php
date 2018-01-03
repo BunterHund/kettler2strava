@@ -23,6 +23,7 @@ include "./languages/$langCode.php";
         <head>
         <title><?php echo $lang['title']; ?></title>
         <link rel="stylesheet" href="./styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Condiment|Sedgwick+Ave+Display" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="Philipp Boksberger" />
         <meta name="keywords" content="<?php echo $lang['keywords']; ?>" />
