@@ -29,18 +29,18 @@ class Kettler {
 	    $kettlerString = $kettlerString . "\n</Activity>";
 	    
 	    // Get XML Structure
-	    $this->$xml = new SimpleXMLElement($kettlerString);
+	    $this->xml = new SimpleXMLElement($kettlerString);
 	
 	}
 	
     function getTCX() {
     
         // Get the start date as a DateTime object
-        $timeString = $this->$xml->Training->Time;
-        $dateString = $this->$xml->Training->Date;
+        $timeString = $this->xml->Training->Time;
+        $dateString = $this->xml->Training->Date;
         $date = DateTime::createFromFormat('d.m.Y-G:i:s',$dateString . "-" . $timeString);
         $startDate = $date->format('Y-m-d') . "T" . $date->format('G:i:s') . ".000Z";
-        $intervall =  $this->$xml->Training->RecordIntervall . "\n";
+        $intervall =  $this->xml->Training->RecordIntervall . "\n";
         
         // Beginning of the TCX
 	    $xmlIntro = <<<EOT
@@ -55,7 +55,7 @@ EOT;
         
         $tcxString .= $this::XMLHEADER_TCX . "\n" .  $xmlIntro . "\n";
 
-        foreach ($this->$xml->Record as $record) {
+        foreach ($this->xml->Record as $record) {
             $tcxString .= $this::RECORD_OPEN . "\n";
             // include time
             $tcxString .= $this::TIME_OPEN;
