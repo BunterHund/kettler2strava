@@ -23,7 +23,7 @@ include "./languages/$langCode.php";
         <head>
         <title><?php echo $lang['title']; ?></title>
         <link rel="stylesheet" href="./styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Condiment|Sedgwick+Ave+Display" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="Philipp Boksberger" />
         <meta name="keywords" content="<?php echo $lang['keywords']; ?>" />
@@ -40,6 +40,11 @@ include "./languages/$langCode.php";
     <body> 
         <div class="wrapper">
             <header>
+                <div id="languages">
+                    <a href="./index.php?lang=de">de</a>
+                    &nbsp;|&nbsp;
+                    <a href="./index.php?lang=en">en</a>
+                </div>
                 <h1><?php echo $lang['heading']; ?></h1>
                 <p class="orange"><?php echo $lang['claim']; ?></p>
                 <nav>
