@@ -59,7 +59,7 @@ if (isset($_FILES['kettlerFile'])) {
     // Display Link for TCX file if converting works
     $response = convert($xml_file,$tcx_file);
     if ($response) {
-        echo "                  <p>" . $lang['download'] . " <a href='$tcx_file'>training.tcx</a></p>";
+        echo "                  <p>" . $lang['download'] . " <a href='$tcx_file' download='training.tcx'>training.tcx</a></p>";
     }
 } else {
 ?>
