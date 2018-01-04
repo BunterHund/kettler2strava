@@ -23,8 +23,11 @@ function convert($xml,$tcx) {
         } 
     } catch (Exception $e) {
         echo "<div id='error-div'>\n";
-        echo "Es gab ein Problem mit deiner Datei:<br />\n";
+        echo "Es gab ein Problem mit deiner Datei:<br />\n<br />\n<i>";
         echo $e->getMessage() . "<br />\n";
+        echo  "</i><br />\n";
+        echo "Schicke mir bitte deine Trainingsdatei per Email, damit ich den Fehler beheben kann.<br />\n";
+        echo "Kontakt: <a href='mailto:philipp@kettler2strava.com'>philipp@kettler2strava.com</a>";
         echo "</div>\n";
         
         // return false if there was an exception
