@@ -31,10 +31,12 @@ function convert($xml,$tcx) {
         echo "</div>\n";
         
         // return false if there was an exception
+        mail('philipp@kettler2strava.com','A problem occurred...',$e->getMessage());
         return false;
     }
     
     // return true if there was no exception
+    mail('philipp@kettler2strava.com','Successfull tcx conversion','Someone used our website...');
     return true;
 }
 
