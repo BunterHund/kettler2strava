@@ -40,24 +40,4 @@ function convert($xml,$tcx) {
     return true;
 }
 
-function getLanguageCode() {
-    if (isset($_GET['lang'])) {
-        return $_GET['lang'];
-    } else {
-	    $languages = explode(",",$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-	    foreach ($languages as $lang) {
-		    $languageCode = substr($lang,0,2);
-		    switch ($languageCode) {
-			    case "de":
-				    return "de";
-			    case "en":
-				    return "en";
-		    }
-	    }
-	}
-	
-	//Default
-	return "en";
-}
-
 ?>

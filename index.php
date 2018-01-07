@@ -1,5 +1,7 @@
 <?php
 require_once('./Kettler.php');
+require_once('./languages/Language.php');
+
 include './functions.php';
 
 define("KETTLER_DIR", "./kettler-files/");
@@ -13,8 +15,8 @@ $tcx_file = TCX_DIR . $uniqueness . ".tcx";
 libxml_use_internal_errors(true);
 
 // set the language of the page
-$langCode = getLanguageCode();
-include "./languages/$langCode.php";
+$lang = new Language();
+include "./languages/$lang->Code.php";
 
 ?>
 
