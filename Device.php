@@ -1,6 +1,6 @@
 <?php
 
-class Kettler {
+class Device {
 
     // Class Variable for the original XML
 	private $xml;

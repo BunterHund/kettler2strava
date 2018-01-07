@@ -1,15 +1,6 @@
 <?php
-require_once('./Kettler.php');
 require_once('./Language.php');
-
-include './functions.php';
-
-define("KETTLER_DIR", "./kettler-files/");
-define("TCX_DIR","./tcx-files/");
-
-$uniqueness = date("Y-m-d_H:i:s_") .  uniqid();
-$xml_file = KETTLER_DIR . $uniqueness . ".xml";
-$tcx_file = TCX_DIR . $uniqueness . ".tcx";
+require_once('./KettlerFile.php');
 
 //Turn off SimpleXML Warnings
 libxml_use_internal_errors(true);
@@ -63,11 +54,34 @@ $lang = new Language();
 <?php       
 if (isset($_FILES['kettlerFile'])) {    
 
-    // Display Link for TCX file if converting works
-    $response = convert($xml_file,$tcx_file);
-    if ($response) {
-        echo "                  <p>" . $lang->get('download') . " <a href='$tcx_file' download='training.tcx'>training.tcx</a></p>";
+    try {
+        $ketFile = new KettlerFile($_FILES['kettlerFile']);
+    
+        // Display overview 
+        // echo "<p>" . $ketFile->getDevice() . "</p>";
+    
+        // Convert
+        $tcxFile = $ketFile->convert();
+    
+        // Display Download-Link
+        echo "<p>" . $lang->get('download') . " <a href='$tcxFile' download='training.tcx'>training.tcx</a></p>";
+        
+        // Notify me
+        mail('philipp@kettler2strava.com','Successfull tcx conversion','Someone used our website...');
+    
+    } catch (Exception $e) { // TODO ... languages ...
+        echo "<div id='error-div'>\n";
+        echo "Es gab ein Problem mit deiner Datei:<br />\n<br />\n<i>";
+        echo $e->getMessage() . "<br />\n";
+        echo  "</i><br />\n";
+        echo "Schicke mir bitte deine Trainingsdatei per Email, damit ich den Fehler beheben kann.<br />\n";
+        echo "Kontakt: <a href='mailto:philipp@kettler2strava.com'>philipp@kettler2strava.com</a>";
+        echo "</div>\n";
+    
+        // return false if there was an exception
+        mail('philipp@kettler2strava.com','A problem occurred...',$e->getMessage());
     }
+
 } else {
 ?>
                     <form method="post" enctype="multipart/form-data">
