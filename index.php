@@ -69,16 +69,24 @@ if (isset($_FILES['kettlerFile'])) {
         // Notify me
         mail('philipp@kettler2strava.com','Successfull tcx conversion','Someone used our website...');
     
-    } catch (Exception $e) { // TODO ... languages ...
+    } catch (Exception $e) {
         echo "<div id='error-div'>\n";
-        echo "Es gab ein Problem mit deiner Datei:<br />\n<br />\n<i>";
-        echo $e->getMessage() . "<br />\n";
+        echo $lang->get('problem') . "<br />\n<br />\n";
+        echo "<i>"; 
+        switch ($e->getCode()) {
+        	case 100:
+        		echo $lang->get('ex100');
+        	case 200:
+        		echo $lang->get('ex200');
+        	default:
+        		echo $e->getMessage();
+        } 
+        echo "<br />\n</i>";
         echo  "</i><br />\n";
-        echo "Schicke mir bitte deine Trainingsdatei per Email, damit ich den Fehler beheben kann.<br />\n";
-        echo "Kontakt: <a href='mailto:philipp@kettler2strava.com'>philipp@kettler2strava.com</a>";
+        echo $lang->get('problemcontact');
         echo "</div>\n";
     
-        // return false if there was an exception
+        // notify me
         mail('philipp@kettler2strava.com','A problem occurred...',$e->getMessage());
     }
 
